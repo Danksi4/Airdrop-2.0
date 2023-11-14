@@ -17,7 +17,7 @@ print(f'[+] Connecting to {host}:{port}...')
 s.connect((host, port))
 print('Connected')
 # send the file name and file size information to the server
-s.send(f'{filesize}{SEPERATOR}{filename}'.encode()) # calls encode() to convert the information to bytes
+s.send(f'{filename}{SEPERATOR}{filesize}'.encode()) # calls encode() to convert the information to bytes
 
 ## SEND THE FILE AND DISPLAY THE PROGRESS
 progress = tqdm.tqdm(range(filesize), f'Sending {filename}', unit = 'B', unit_scale = True, unit_divisor = 1024) # creates the progress bar for file transmission

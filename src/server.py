@@ -5,7 +5,7 @@ import os
 SERVER_HOST = '0.0.0.0' # indicates all local machine IP addresses for use
 SERVER_PORT = 5001 # match with the client port
 BUFFER_SIZE = 4096 # max bytes that can be received each time
-SEPERATOR = '<SEPERATOR'
+SEPERATOR = '<SEPERATOR>'
 
 ## CONNECTION
 s = socket.socket() # creates the TCP socket from the socket module
@@ -18,7 +18,7 @@ received = client_socket.recv(BUFFER_SIZE).decode() # receive using the client s
 filename, filesize = received.split(SEPERATOR)
 filename = os.path.basename(filename) # removes the absolute path of the file as the client's path
 # will be different than the server's path
-filesize = int(filesize) # concerts filesize from str to int
+filesize = int(filesize) # converts filesize from str to int
 
 ## RECEIVING
 progress = tqdm.tqdm(range(filesize), f"Receiving {filename}", unit="B", unit_scale=True, unit_divisor=1024)
