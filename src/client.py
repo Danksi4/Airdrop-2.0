@@ -7,7 +7,7 @@ BUFFER_SIZE = 4096
 
 host = '192.168.64.4'
 port = 5001
-filename = 'text.txt'
+filename = 'file.txt'
 # get the size of the file in bytes
 filesize = os.path.getsize(filename)
 # create the client socket
