@@ -1,5 +1,8 @@
 # Airdrop-2.0
 
+## Objective
+Airdrop-2.0 is intended to be able to send files across internet networks from one device to another.
+
 ## Setup
 Ultimately, a makefile or .sh file would be best to run and have it execute everything needed. However, for now, loosely follow the following instructions to setup from scratch:
 - Ensure the latest version of Python and pip is installed
