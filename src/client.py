@@ -5,7 +5,7 @@ import socket
 SEPERATOR = '<SEPERATOR>'
 BUFFER_SIZE = 4096
 
-host = '192.168.64.4'
+host = '10.0.0.215'
 port = 5001
 filename = 'file.txt'
 # get the size of the file in bytes
