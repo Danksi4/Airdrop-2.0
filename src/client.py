@@ -13,7 +13,7 @@ filesize = os.path.getsize(filename)
 # create the client socket
 s = socket.socket()
 # connecting to the server
-print(f'[+] Connecting to {host}:{port}...')
+print(f'[+] Connecting to {host}:{port}')
 s.connect((host, port))
 print('Connected')
 # send the file name and file size information to the server
