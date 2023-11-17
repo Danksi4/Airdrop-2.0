@@ -27,7 +27,7 @@ class encryption():
         return final
     
 
-'''Test example on how to call, need to figure out why it creates the same key when called withh diff objects.'''
+'''Test example on how to call'''
 message=input('Message to be encrypted: ')
 keytest=encryption(message)
 print("The key is:",keytest.load_key())
