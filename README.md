@@ -12,3 +12,7 @@ Ultimately, a makefile or .sh file would be best to run and have it execute ever
 - Activate the virtual environment (within the project folder airdrop_2.0): `source airdrop_venv/bin/activate`
 - Install tqdm: `pip install tqdm`
   
+## Database Setup
+- Create a Google Sheets API project
+- Source venv
+-`python3 -m pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib`
