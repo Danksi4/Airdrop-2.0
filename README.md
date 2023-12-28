@@ -13,11 +13,22 @@ Ultimately, a makefile or .sh file would be best to run and have it execute ever
 - Install tqdm: `pip install tqdm`
   
 ## Database Setup
-- Follow the Google Sheets API tutorial, using this installation command `python3 -m pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib`
+- the `make setup` command should install all necessry dependencies
+- the database class inside the database module has the following methods:
+    - addUser: appends new users to the Google sheet
+        - arguments: user name (string), IP address (string)
+        - returns: nothing
+    - findUser: determines if the username is already in the database
+        - returns: True if user already found, False if user not already found
+    - getUser: 
+        -returns: user's ip address based on username if found, False if no user found
+    - sheetDump: prints out all users
+- more features to be added to accomodate encryption keys
 
 ## Features
 The features of our proposed program are as follows:
 - Interface our program with a modern GUI
-- Store and update all necessary info of customer's computers in a cloud database to streamline the connection between computers
-- Allow access from one customer's computer to another if mutually agreed by both customers
+- Store and update all necessary info of customer's computers in a cloud database to streamline the 
+    connection between computers
+- Allow access from one customer's computer to another if in the same network (should we add security?)
 - Compress, encrypt, and transmit files between customers
