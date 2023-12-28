@@ -1,5 +1,16 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import socket
+
+# ------------------ Connection Test Function -----------------------  
+def connectionTest():
+    try:
+        # connect to the host -- google.com
+        socket.create_connection(("www.google.com", 80))
+        return True # if connected
+    except OSError:
+        pass
+    return False # if not connected
 
 # ------------------ Setting up Google Sheets API -----------------------           
 scope = [
@@ -8,9 +19,9 @@ scope = [
 ]
 creds = ServiceAccountCredentials.from_json_keyfile_name("secret_key.json", scopes=scope)
 client = gspread.authorize(creds)
-# FIXME the below line doesn't work
+assert connectionTest(), "Not connected to the internet"
+print("Succesful internet connection")
 spreadsheet = client.open("AirdropDatabase")
-
 worksheet = spreadsheet.sheet1
 
 # ------------------ The Database class -----------------------           
@@ -34,10 +45,7 @@ class database():
     def getUser(self,name):
         if self.findUser(name) == True: # if the username exists
             cell = worksheet.find("Maddy")
-            # print(cell)
-            # row = cell.row
-            # column = cell.column + 1
-            # print(row, column)
+            print(worksheet.cell(cell.row, (cell.col+1)).value)
         else:
             print(f"Hmmmm. The username {name} is not in our system.") 
             return False 
@@ -45,7 +53,6 @@ class database():
     def sheetDump(self):
         print(worksheet.get_all_values())
 
-print("hello")
-# x = database()
-# x.findUser("Maddy")
-# #x.getUser("Maddy")
+x = database()
+x.findUser("Maddy")
+x.getUser("Maddy")
