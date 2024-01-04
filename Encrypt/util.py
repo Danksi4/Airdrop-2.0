@@ -1,14 +1,3 @@
-"""
---------------------------------------------
-Name: Alex Alves
-SID: 1755820
-CCID: alves1
-AnonID: 1000362583
-CMPUT 274, Fall 2023
-
-Assessment: Assignment 2
---------------------------------------------
-"""
 import bitio
 import huffman
 import pickle
