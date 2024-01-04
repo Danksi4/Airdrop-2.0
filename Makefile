@@ -5,7 +5,7 @@ venv:
 setup:
 	@echo to install all packages required for the database, cryptography, compression, etc
 	sudo apt-get install pip
-	python3 -m pip install gpspread oauth2client cryptography tqdm
+	python3 -m pip install gspread oauth2client cryptography tqdm
 
 push:
 	git add .
