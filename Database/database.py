@@ -52,7 +52,7 @@ class database():
     
     def sheetDump(self):
         print(worksheet.get_all_values())
-
+        
 x = database()
 x.findUser("Maddy")
 x.getUser("Maddy")
