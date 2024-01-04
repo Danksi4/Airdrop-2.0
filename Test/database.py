@@ -31,13 +31,16 @@ class Database():
 
     def findUser(self,name):
             if worksheet.find(str(name)) is not None:
+                print(f"The username {name} is indeed in the database.") 
                 return True
             else:
+                print(f"The username {name} is not found in the database.") 
                 return False
             
     def addUser(self,name,address):
-        if self.getUser(name) == False: # if the username is not already in use
+        if self.findUser(name) == False: # if the username is not already in use
             worksheet.append_row([name,address])
+            print(f"The username {name} has been added to the database.") 
         else:
             print(f"Please choose a different user name. {name} is already taken.") 
             return False
@@ -55,8 +58,9 @@ class Database():
         
 if __name__=="__main__":
     x = Database()
-    x.addUser("Maddy", "172.168.55.1")
-    x.findUser("Maddy")
-    print(x.findUser("Me"))
-    x.getUser("Maddy")
+    x.addUser("Dan", "172.168.55.1")
+    # x.findUser("Bradley")
+    # x.findUser("dan")
+    # print(x.findUser("Me"))
+    # x.getUser("Maddy")
     
