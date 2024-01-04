@@ -45,37 +45,39 @@ class fileEncryption(encryption):
             file_obj.write(decrypted)
         return -1
 
-if __name__=='main':
-    '''Test example on how to call'''
-    print('-'*20)
-    print('Text Transfer Test')
-    print('-'*20)
-    message=input('Message to be encrypted: ')
-    keytest=encryption(message)
-    print("The key is:",keytest.load_key())
-    x=keytest.encrypt()
-    print('The encrypted message is:',x)
-    Final=keytest.decrypt(x)
-    print('The final message is:',Final)
+if __name__=='__main__':
+    ans=input('Which Test?')
+    if ans=='1':
+        '''Test example on how to call'''
+        print('-'*20)
+        print('Text Transfer Test')
+        print('-'*20)
+        message=input('Message to be encrypted: ')
+        keytest=encryption(message)
+        print("The key is:",keytest.load_key())
+        x=keytest.encrypt()
+        print('The encrypted message is:',x)
+        Final=keytest.decrypt(x)
+        print('The final message is:',Final)
+
+    if ans=='2':
+        '''Test for file encryption'''
+        print('-'*20)
+        print('File Transfer Test')
+        print('-'*20)
+        file='Test.txt'
+        filetest=fileEncryption()
+        print("The key is:",filetest.load_key())
+        filetest.encrypt(file)
+        with open(file, 'rb') as fileobj:
+            container=fileobj.read()
+        print('The encrypted file contains: '+str(container))
+        filetest.decrypt(file)
+        with open(file) as newobj:
+            newcontainer=newobj.readlines()
+        print('The decrypted file contains:')
+        print(newcontainer)
 
 
-    '''Test for file encryption'''
-    print('-'*20)
-    print('File Transfer Test')
-    print('-'*20)
-    file='Test.txt'
-    filetest=fileEncryption()
-    print("The key is:",filetest.load_key())
-    filetest.encrypt(file)
-    with open(file, 'rb') as fileobj:
-        container=fileobj.read()
-    print('The encrypted file contains: '+str(container))
-    filetest.decrypt(file)
-    with open(file) as newobj:
-        newcontainer=newobj.readlines()
-    print('The decrypted file contains:')
-    print(newcontainer)
 
-
-
-        
+            
