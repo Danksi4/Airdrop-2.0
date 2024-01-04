@@ -9,9 +9,7 @@ class App(customtkinter.CTk):
         super().__init__()
         self.title("Airdrop 2.0")
         self.geometry("800x600")
-
-    
-        
+  
     def start(self):
         self.mainloop()
 

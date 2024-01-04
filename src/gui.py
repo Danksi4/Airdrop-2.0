@@ -23,7 +23,6 @@
 
 # # buttonExit = customtkinter.CTkButton(window, text='Exit', command=window.controller.root.destroy)
 # # buttonExit.grid(row=0, column=2, sticky='NSE')
-
 import customtkinter
 from tkintermapview import TkinterMapView
 
