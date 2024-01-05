@@ -62,5 +62,5 @@ if __name__=="__main__":
     # x.findUser("Bradley")
     # x.findUser("dan")
     # print(x.findUser("Me"))
-    # x.getUser("Maddy")
+    x.getUser("Maddy")
     
