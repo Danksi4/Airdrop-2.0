@@ -3,7 +3,7 @@ import database
 import transfer
 
 customtkinter.set_default_color_theme("dark-blue")
-customtkinter.set_appearance_mode("dark-blue")
+customtkinter.set_appearance_mode("dark")
 
 class App(customtkinter.CTk):
     
