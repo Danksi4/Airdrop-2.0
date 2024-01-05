@@ -1,9 +1,0 @@
-
-1: Initialize the Encryption on desired file
-2: compress Encrypted file
-3: Send over compressed/Encrypted file
-4: Recipient side decompresses the file
-5: Recipient side Decrypts the file
-
-We will need to use classes from Testencrypt.py 
-as well as DandCclasses.py

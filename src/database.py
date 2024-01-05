@@ -67,7 +67,6 @@ class Database():
     def getKey(self,name=str):
         if self.findUser(name) == True: # if the username exists
             cell = worksheet.find(name)
-            print(cell)
             key = worksheet.cell(cell.row, (cell.col+2)).value
             if key != None:
                 print(key)

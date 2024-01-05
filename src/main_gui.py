@@ -1,7 +1,7 @@
 import customtkinter
 import database
 import transfer
-from airdrop_program import Encrypt.process 
+import Encrypt.Process as process
 
 customtkinter.set_default_color_theme("blue")
 customtkinter.set_appearance_mode("dark")
