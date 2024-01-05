@@ -10,6 +10,9 @@ class encryption():
         with open('tempkeys/key#'+self.ID,'wb') as key_file:
             key_file.write(self.key)
 
+    def load_ID(self):
+        return self.ID
+
     def load_key(self):
         load=open('tempkeys/key#'+self.ID,'rb').read() #Push this to google sheets
         return load
@@ -36,11 +39,13 @@ class fileEncryption(encryption):
             file_obj.write(encrypted)
         return -1
 
-    def decrypt(self, filename, classification='Basic'):
+    def decrypt(self, filename, classification='Basic',id='0'):
         if classification == 'Basic':
             f = Fernet(self.key)
         if classification == 'S': #if run on seperate process.
-            f=Fernet() #need this to pull from the google sheets
+            with open('tempkeys/key#'+id,'rb') as keyfile:#needs to instead pull from sheets.
+                key=keyfile.read()
+            f=Fernet(key)
         with open(filename, 'rb') as file_obj:
             encrypted_content = file_obj.read()
         decrypted = f.decrypt(encrypted_content)
@@ -48,7 +53,7 @@ class fileEncryption(encryption):
             file_obj.write(decrypted)
         return -1
 
-if __name__=='__main__':
+if __name__=='__main__': #Test cases for both classes
     ans=input('Which Test?')
     if ans=='1':
         '''Test example on how to call'''
