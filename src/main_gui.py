@@ -21,7 +21,7 @@ class App(customtkinter.CTk):
         except FileNotFoundError:
             print(f"File '{'accountInfo.txt'}' not found.")
 
-        if (self.USER = None) and (self.IPADDRESS = None):
+        if (self.USER == None) and (self.IPADDRESS == None):
             pass
 
         super().__init__(*args, **kwargs)
@@ -75,7 +75,6 @@ class App(customtkinter.CTk):
 
     def receiveFile(self):
         transfer.receive()
-
 
 if __name__=="__main__":
     db = database.Database()
