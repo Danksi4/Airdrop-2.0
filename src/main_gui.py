@@ -1,14 +1,29 @@
 import customtkinter
 import database
 import transfer
-import Encrypt.Process as process
+#import Encrypt.Process as process
 
 customtkinter.set_default_color_theme("blue")
 customtkinter.set_appearance_mode("dark")
 
 class App(customtkinter.CTk):
     
+    USER = None
+    IPADDRESS = None
+    
     def __init__(self, database, *args, **kwargs):
+        
+        try:
+            with open('accountInfo.txt','r') as file:
+                self.USER, self.IPADDRESS = file.read().split()
+                print(self.USER)
+                print(self.IPADDRESS)
+        except FileNotFoundError:
+            print(f"File '{'accountInfo.txt'}' not found.")
+
+        if (self.USER = None) and (self.IPADDRESS = None):
+            pass
+
         super().__init__(*args, **kwargs)
         self.title("Airdrop 2.0")
         self.geometry("800x600")
