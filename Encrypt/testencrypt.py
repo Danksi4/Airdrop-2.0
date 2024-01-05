@@ -11,7 +11,7 @@ class encryption():
             key_file.write(self.key)
 
     def load_key(self):
-        load=open('tempkeys/key#'+self.ID,'rb').read()
+        load=open('tempkeys/key#'+self.ID,'rb').read() #Push this to google sheets
         return load
     
     def encrypt(self):
@@ -36,8 +36,11 @@ class fileEncryption(encryption):
             file_obj.write(encrypted)
         return -1
 
-    def decrypt(self, filename):
-        f = Fernet(self.key)
+    def decrypt(self, filename, classification='Basic'):
+        if classification == 'Basic':
+            f = Fernet(self.key)
+        if classification == 'S': #if run on seperate process.
+            f=Fernet() #need this to pull from the google sheets
         with open(filename, 'rb') as file_obj:
             encrypted_content = file_obj.read()
         decrypted = f.decrypt(encrypted_content)
