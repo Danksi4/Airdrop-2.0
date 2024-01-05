@@ -29,7 +29,7 @@ class Database():
     def __init__(self):
         pass
 
-    def findUser(self,name):
+    def findUser(self,name=str): # determines if the user exists in the database
             if worksheet.find(str(name)) is not None:
                 print(f"The username {name} is indeed in the database.") 
                 return True
@@ -37,7 +37,7 @@ class Database():
                 print(f"The username {name} is not found in the database.") 
                 return False
             
-    def addUser(self,name,address):
+    def addUser(self,name=str,address=str): # adds the user and ip address
         if self.findUser(name) == False: # if the username is not already in use
             worksheet.append_row([name,address])
             print(f"The username {name} has been added to the database.") 
@@ -45,20 +45,33 @@ class Database():
             print(f"Please choose a different user name. {name} is already taken.") 
             return False
         
-    def getUser(self,name):
+    def getUserAddress(self,name=str): # returns the user's ip address
         if self.findUser(name) == True: # if the username exists
             cell = worksheet.find("Maddy")
+            print(cell)
             print(worksheet.cell(cell.row, (cell.col+1)).value)
         else:
             print(f"Hmmmm. The username {name} is not in our system.") 
             return False 
     
-    def sheetDump(self):
+    def sheetDump(self): # dumps all sheet values
         print(worksheet.get_all_values())
+
+    def addKey(self,name=str,key=str):
+        if self.findUser(name) == False: # if the username is not already in use
+            worksheet.append_row([name,address])
+            print(f"The username {name} has been added to the database.") 
+        else:
+            print(f"Please choose a different user name. {name} is already taken.") 
+            return False
+
+    def getKey(self):
+        pass
         
 if __name__=="__main__":
     x = Database()
     x.addUser("Dan", "172.168.55.1")
+    x.getUserAddress("Dan")
     # x.findUser("Bradley")
     # x.findUser("dan")
     # print(x.findUser("Me"))
