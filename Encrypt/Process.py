@@ -20,4 +20,6 @@ def Receiver(file):
     return -1
 
 if __name__=='__main__':
-    Receiver('Test.txt')
+    files='Test.txt'
+    Sender(files)
+    Receiver(files)

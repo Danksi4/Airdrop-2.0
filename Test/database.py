@@ -47,8 +47,7 @@ class Database():
         
     def getUserAddress(self,name=str): # returns the user's ip address
         if self.findUser(name) == True: # if the username exists
-            cell = worksheet.find("Maddy")
-            print(cell)
+            cell = worksheet.find(name)
             print(worksheet.cell(cell.row, (cell.col+1)).value)
         else:
             print(f"Hmmmm. The username {name} is not in our system.") 
@@ -65,15 +64,22 @@ class Database():
             print(f"Please choose a different user name. {name} is already taken.") 
             return False
 
-    def getKey(self):
-        pass
+    def getKey(self,name=str):
+        if self.findUser(name) == True: # if the username exists
+            cell = worksheet.find(name)
+            key = worksheet.cell(cell.row, (cell.col+2)).value
+            if key != None:
+                print(key)
+                return key
+            else:
+                print(f"There is no encryption key associated with {name}")
+                return False
+        else:
+            print(f"Hmmmm. The username {name} is not in our system.") 
+            return False 
         
 if __name__=="__main__":
     x = Database()
-    x.addUser("Dan", "172.168.55.1")
-    x.getUserAddress("Dan")
-    # x.findUser("Bradley")
-    # x.findUser("dan")
-    # print(x.findUser("Me"))
-    # x.getUser("Maddy")
+    x.addUser("Dan", "dfgfdgfdg")
+    x.getKey("Dan")
     

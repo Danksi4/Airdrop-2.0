@@ -6,7 +6,7 @@ customtkinter.set_default_color_theme("blue")
 customtkinter.set_appearance_mode("dark")
 
 class App(customtkinter.CTk):
-
+    
     def __init__(self, database, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.title("Airdrop 2.0")
@@ -19,9 +19,18 @@ class App(customtkinter.CTk):
         self.ipaddress = customtkinter.CTkEntry(self, placeholder_text="Enter IP Address")
         self.ipaddress.grid(row=1, column=0, sticky="we", padx=(12, 0), pady=12)
 
-        self.button = customtkinter.CTkButton(self, text="Submit", command=self.entryBox)
-        self.button.grid(row=2, column=0, sticky="w", padx=(12, 0), pady=12)
-        #self.entry.bind("<Return>", self.entryBox) # call entryBox method when return key is pressed
+        self.submitbutton = customtkinter.CTkButton(self, text="Submit", command=self.entryBox)
+        self.submitbutton.grid(row=2, column=0, sticky="w", padx=(12, 0), pady=12)
+        # create a textbox for entering the recipients username
+        self.receiver = customtkinter.CTkEntry(self, placeholder_text="Enter Recipient Username")
+        self.receiver.grid(row=0, column=2, sticky="we", padx=(12, 0), pady=12)
+        # create a textbox for entering the filename
+        self.filename = customtkinter.CTkEntry(self, placeholder_text="Enter Filename You Wish to Send")
+        self.filename.grid(row=1, column=2, sticky="we", padx=(12, 0), pady=12)
+        # create a send button that calls the sendFile() function when pressed
+        self.sendbutton = customtkinter.CTkButton(self, text="Send File", command=self.sendFile)
+        self.sendbutton.grid(row=2, column=2, sticky="w", padx=(12, 0), pady=12)
+        
         
     def start(self):
         self.mainloop()
@@ -31,16 +40,24 @@ class App(customtkinter.CTk):
         self.username.delete(0,len(self.username.get()))
         self.ipaddress.delete(0,len(self.ipaddress.get()))
 
-    def fileLocation():
+    def fileLocation(self):
         pass
 
-    def findClient():
+    def findClient(self):
         pass
 
-    def sendFile():
-        transfer.send()
+    def sendFile(self):  
+        # FIXME once the ip adress is obtained using the username, pass that into the transfer.send() function as the recipients ip
+        # get the recipients ip adress using their username
+        host_ip = self.db.getUser(self.receiver.get())
+        file_name = self.filename.get()
+        self.receiver.delete(0,len(self.receiver.get()))
+        self.filename.delete(0,len(self.filename.get()))
 
-    def receiveFile():
+        transfer.send(host_ip, file_name)
+
+
+    def receiveFile(self):
         transfer.receive()
 
 
