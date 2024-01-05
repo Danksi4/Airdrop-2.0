@@ -1,3 +1,6 @@
+# FIXME add error handling to both functions
+# FIXME should we send the encryption keys using these functions?
+
 import socket
 import tqdm
 import os

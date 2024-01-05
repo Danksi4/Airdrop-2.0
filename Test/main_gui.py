@@ -1,5 +1,6 @@
 import customtkinter
 import database
+import transfer
 
 customtkinter.set_default_color_theme("dark-blue")
 customtkinter.set_appearance_mode("dark-blue")
@@ -37,7 +38,10 @@ class App(customtkinter.CTk):
         pass
 
     def sendFile():
-        pass
+        transfer.send()
+
+    def receiveFile():
+        transfer.receive()
 
 
 if __name__=="__main__":
