@@ -57,16 +57,17 @@ class Database():
         print(worksheet.get_all_values())
 
     def addKey(self,name=str,key=str):
-        if self.findUser(name) == False: # if the username is not already in use
-            worksheet.append_row([name,address])
-            print(f"The username {name} has been added to the database.") 
+        if self.findUser(name) == True: # if the username exists
+            cell = worksheet.find(name)
+            worksheet.update_cell(cell.row, (cell.col+2), key)
         else:
-            print(f"Please choose a different user name. {name} is already taken.") 
-            return False
+            print(f"Hmmmm. The username {name} is not in our system.") 
+            return False 
 
     def getKey(self,name=str):
         if self.findUser(name) == True: # if the username exists
             cell = worksheet.find(name)
+            print(cell)
             key = worksheet.cell(cell.row, (cell.col+2)).value
             if key != None:
                 print(key)
@@ -81,5 +82,6 @@ class Database():
 if __name__=="__main__":
     x = Database()
     x.addUser("Dan", "dfgfdgfdg")
+    x.addKey("Dan","45678")
     x.getKey("Dan")
     
