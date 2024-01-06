@@ -58,7 +58,7 @@ class App(customtkinter.CTk):
 
 
     def addUserForFirstTime(self,errorMessage=""):
-        # FIXME automatically ping their ip address to validate that it works
+        # FIXME use the code in net.py to automatically enter their IP Address
         self.clearScreen()
 
         self.label = customtkinter.CTkLabel(self, text="Welcome to Airdrop 2.0! It looks like you"
