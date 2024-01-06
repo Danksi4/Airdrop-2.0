@@ -1,6 +1,7 @@
 import customtkinter
 import database
 import transfer
+import subprocess
 #import Encrypt.Process as process
 
 customtkinter.set_default_color_theme("blue")
@@ -63,7 +64,7 @@ class App(customtkinter.CTk):
         self.label = customtkinter.CTkLabel(self, text="Welcome to Airdrop 2.0! It looks like you"
                                             " aren't entered into our database yet. Please enter your"
                                             " username and IP address.", fg_color="transparent")
-        self.label.grid(row=0, column=0, columnspan = 3, sticky="w", padx=(12, 0), pady=12)
+        self.label.grid(row=0, column=0, columnspan=3, sticky="w", padx=(12, 0), pady=12)
 
         self.username = customtkinter.CTkEntry(self, placeholder_text="Enter Username")
         self.username.grid(row=1, column=0, sticky="we", padx=(12, 0), pady=12)
@@ -75,7 +76,13 @@ class App(customtkinter.CTk):
         self.submitbutton.grid(row=1, column=2, sticky="w", padx=(12, 0), pady=12)
 
         self.errorLabel = customtkinter.CTkLabel(self, text=f"{errorMessage}", fg_color="transparent")
-        self.errorLabel.grid(row=2, column=0, columnspan = 3, sticky="w", padx=(12, 0), pady=12)
+        self.errorLabel.grid(row=2, column=0, columnspan=3, sticky="w", padx=(12, 0), pady=12)
+
+        # FIXME get this working so it will run on Windows (ipconfig) and Mac as well
+        self.result = subprocess.run(['ifconfig'], capture_output=True, text=True)
+        self.textbox = customtkinter.CTkTextbox(master=self, width=400, corner_radius=0)
+        self.textbox.grid(row=3, column=0, columnspan=3, sticky="nsew", padx=(12, 0), pady=12)
+        self.textbox.insert("0.0", str(self.result.stdout))
 
 
     def recordNewUser(self,event=None):
@@ -103,7 +110,7 @@ class App(customtkinter.CTk):
     def button_click_event(self):
         dialog = customtkinter.CTkInputDialog(text="Type in a number:", title="Test")
         print("Number:", dialog.get_input())
-        
+
 
     def fileLocation(self):
         pass
