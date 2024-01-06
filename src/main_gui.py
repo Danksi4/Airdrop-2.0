@@ -53,17 +53,16 @@ class App(customtkinter.CTk):
         y = (hs/2) - (h/2)
         self.geometry('%dx%d+%d+%d' % (w, h, x, y)) # screen dimensions and spawn location
 
-        ## Deciding if they need to add their username and ip address or not
+        ## Deciding if the user needs to add their username and ip address or not
          
         self.main()
         if (self.USER == None) and (self.IPADDRESS == None):
-            print("override")
             self.addUserForFirstTime()
         else:
             self.main()
 
+
     def main(self):
-        
         # create a textbox for entering the recipients username
         self.receiver = customtkinter.CTkEntry(self, placeholder_text="Enter Recipient Username")
         self.receiver.grid(row=0, column=2, sticky="we", padx=(12, 0), pady=12)
@@ -74,47 +73,58 @@ class App(customtkinter.CTk):
         self.sendbutton = customtkinter.CTkButton(self, text="Send File", command=self.sendFile)
         self.sendbutton.grid(row=2, column=2, sticky="w", padx=(12, 0), pady=12)
 
-    def addUserForFirstTime(self):
+
+    def addUserForFirstTime(self,errorMessage=""):
         # FIXME automatically ping their ip address to validate that it works
-        self.username.destroy()
-        self.ipaddress.destroy()
-        self.submitbutton.destroy()
-        self.receiver.destroy()
-        self.filename.destroy()
-        self.sendbutton.destroy()
-        
-        self.label = customtkinter.CTkLabel(self, text="Welcome to Airdrop 2.0! Please enter your username and ip address", fg_color="transparent")
-        self.label.grid(row=1, column=1, sticky="w", padx=(12, 0), pady=12)
+        self.clearScreen()
+
+        self.label = customtkinter.CTkLabel(self, text="Welcome to Airdrop 2.0! It looks like you"
+                                            " aren't entered into our database yet. Please enter your"
+                                            " username and ip address", fg_color="transparent")
+        self.label.grid(row=1, column=0, columnspan = 3, sticky="w", padx=(12, 0), pady=12)
+
+        self.errorLabel = customtkinter.CTkLabel(self, text=f"{errorMessage}", fg_color="transparent")
+        self.errorLabel.grid(row=0, column=0, columnspan = 3, sticky="w", padx=(12, 0), pady=12)
 
         self.username = customtkinter.CTkEntry(self, placeholder_text="Enter Username")
-        self.username.grid(row=0, column=0, sticky="we", padx=(12, 0), pady=12)
+        self.username.grid(row=2, column=0, sticky="we", padx=(12, 0), pady=12)
 
         self.ipaddress = customtkinter.CTkEntry(self, placeholder_text="Enter IP Address")
-        self.ipaddress.grid(row=1, column=0, sticky="we", padx=(12, 0), pady=12)
+        self.ipaddress.grid(row=2, column=1, sticky="we", padx=(12, 0), pady=12)
 
         self.submitbutton = customtkinter.CTkButton(self, text="Submit", command=self.entryBox)
-        self.submitbutton.grid(row=2, column=0, sticky="w", padx=(12, 0), pady=12)
+        self.submitbutton.grid(row=2, column=2, sticky="w", padx=(12, 0), pady=12)
     
+
     def clearScreen(self):
-        self.label.destroy()
-        self.sendbutton_4.destroy()
-        self.main()
+        for widget in self.winfo_children():
+            widget.destroy()
+
 
     def button_click_event(self):
         dialog = customtkinter.CTkInputDialog(text="Type in a number:", title="Test")
         print("Number:", dialog.get_input())
 
+
     def entryBox(self,event=None):
-        self.db.addUser(self.username.get(),self.ipaddress.get())
-        self.username.delete(0,len(self.username.get()))
-        self.ipaddress.delete(0,len(self.ipaddress.get()))
-        self.clearScreen()
+        if self.db.findUser(self.username.get()) == True: # if their username is already in use
+            self.addUserForFirstTime(
+                f"{self.username.get()} already exists. Please enter a different username")
+        else:
+            self.db.addUser(self.username.get(),self.ipaddress.get())
+            self.username.delete(0,len(self.username.get()))
+            self.ipaddress.delete(0,len(self.ipaddress.get()))
+            self.clearScreen()
+            self.main()
+
 
     def fileLocation(self):
         pass
 
+
     def findClient(self):
         pass
+
 
     def sendFile(self):  
         # FIXME once the ip adress is obtained using the username, pass that into the transfer.send() function as the recipients ip
@@ -126,11 +136,14 @@ class App(customtkinter.CTk):
 
         transfer.send(host_ip, file_name)
 
+
     def receiveFile(self):
         transfer.receive()
     
+
     def start(self):
         self.mainloop()
+
 
 if __name__=="__main__":
     db = database.Database()
