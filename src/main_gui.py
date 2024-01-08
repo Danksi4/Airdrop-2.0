@@ -128,11 +128,11 @@ class App(customtkinter.CTk):
         self.receiver.delete(0,len(self.receiver.get()))
         self.filename.delete(0,len(self.filename.get()))
 
-        transfer.send(host_ip, file_name)
+        transfer.send(host_ip, file_name, self.receiver.get())
 
 
     def receiveFile(self):
-        transfer.receive()
+        transfer.receive(self.receiver.get())
     
 
     def start(self):
