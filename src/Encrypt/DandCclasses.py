@@ -1,6 +1,6 @@
-from testencrypt import fileEncryption
-import huffman
-import util
+
+import Encrypt.huffman as huffman
+import Encrypt.util as util
 
 '''
 -------------------
@@ -22,7 +22,7 @@ class DandC():
 
     def decompressor(self):
         with open(self.compressedfile , 'rb') as comped:
-            with open(self.file+'decomp','wb') as decomped:
+            with open(self.file,'wb') as decomped:
                 util.decompress(comped,decomped)
         return -1
 if __name__=='__main__':

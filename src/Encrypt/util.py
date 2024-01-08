@@ -1,5 +1,5 @@
-import bitio
-import huffman
+import Encrypt.bitio as bitio
+import Encrypt.huffman as huffman
 import pickle
 
 

@@ -4,21 +4,30 @@
 import socket
 import tqdm
 import os
+import Encrypt.Process as process
+from database import Database
 
 BUFFER_SIZE = 4096
 SEPERATOR = '<SEPERATOR>'
 SERVER_HOST = '0.0.0.0' # indicates all local machine IP addresses for use
 SERVER_PORT = 5001 # match with the client port
 
-def send(hostIPAddress=str,filename=str):
+def send(hostIPAddress=str,filename=str,Username=str):
     ## The send function employs the client code in order to send files to the server
     
     ## Connection
-    filesize = os.path.getsize(filename)  # get the size of the file in bytes
+    #filesize = os.path.getsize(filename)  # get the size of the file in bytes '''Removed for now -A'''
     s = socket.socket()  # create the client socket
     print(f'[+] Connecting to {hostIPAddress}:{SERVER_PORT}')  # connecting to the server
     s.connect((hostIPAddress, SERVER_PORT))
     print('Connected')
+    #----------- Start of Encryption/Comp -----------#
+    key=process.Sender(filename) #NEED TO VERIFY
+    x=Database                   #--------------
+    Database.addKey(Username,key)#--------------
+    filename=filename+'E'        #--------------
+    filesize = os.path.getsize(filename) #Added here to get compressed size --------
+    #----------- End of Encryption/Comp -------------#
     # send the file name and file size information to the server
     s.send(f'{filename}{SEPERATOR}{filesize}'.encode()) # calls encode() to convert the information to bytes
 
@@ -37,7 +46,7 @@ def send(hostIPAddress=str,filename=str):
     s.close()
 
 
-def receive():
+def receive(Username=str):
     ## The receive function employs the server code in order to recieve files from the client
     
     ## CONNECTION
@@ -62,6 +71,11 @@ def receive():
                 break
             f.write(bytes_read)
             progress.update(len(bytes_read)) # updates the progress bar with bytes_read / range(filesize)
-
+    #----------- Start of decryption/Decomp --------#
+    key=Database.getKey(Username)
+    x=Database
+    process.Receiver(filename,key)
     client_socket.close()
+    print('The file has now been decompressed')
+
     s.close()

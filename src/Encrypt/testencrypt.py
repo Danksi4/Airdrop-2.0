@@ -7,15 +7,15 @@ class encryption():
         self.name=name
         self.ID=str(random.random())
         self.key=Fernet.generate_key()
-        with open('tempkeys/key#'+self.ID,'wb') as key_file:
-            key_file.write(self.key)
+        #with open('tempkeys/key#'+self.ID,'wb') as key_file:
+            #key_file.write(self.key)
+        #print(self.key)
 
     def load_ID(self):
         return self.ID
 
     def load_key(self):
-        load=open('tempkeys/key#'+self.ID,'rb').read() #Push this to google sheets
-        return load
+        return self.key
     
     def encrypt(self):
         message=self.name.encode()
@@ -35,17 +35,15 @@ class fileEncryption(encryption):
         with open(filename, 'rb') as file_obj:
             file_content = file_obj.read()
         encrypted = f.encrypt(file_content)
-        with open(filename, 'wb') as file_obj:
+        with open(filename+'E', 'wb') as file_obj:
             file_obj.write(encrypted)
         return -1
 
-    def decrypt(self, filename, classification='Basic',id='0'):
-        if classification == 'Basic':
+    def decrypt(self, filename, classification='B',id='0'):
+        if classification == 'B':
             f = Fernet(self.key)
         if classification == 'S': #if run on seperate process.
-            with open('tempkeys/key#'+id,'rb') as keyfile:#needs to instead pull from sheets.
-                key=keyfile.read()
-            f=Fernet(key)
+            f=Fernet(id)
         with open(filename, 'rb') as file_obj:
             encrypted_content = file_obj.read()
         decrypted = f.decrypt(encrypted_content)
@@ -77,10 +75,10 @@ if __name__=='__main__': #Test cases for both classes
         filetest=fileEncryption()
         print("The key is:",filetest.load_key())
         filetest.encrypt(file)
-        with open(file, 'rb') as fileobj:
+        with open(file+'E', 'rb') as fileobj:
             container=fileobj.read()
         print('The encrypted file contains: '+str(container))
-        filetest.decrypt(file)
+        filetest.decrypt(file+'E')
         with open(file) as newobj:
             newcontainer=newobj.readlines()
         print('The decrypted file contains:')
