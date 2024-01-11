@@ -2,7 +2,7 @@ import customtkinter
 import database
 import transfer
 import subprocess
-#import Encrypt.Process as process
+import Encrypt.Process as process
 
 customtkinter.set_default_color_theme("blue")
 customtkinter.set_appearance_mode("dark")
