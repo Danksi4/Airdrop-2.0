@@ -58,9 +58,10 @@ class Database():
         print(worksheet.get_all_values())
 
     def addKey(self,name=str,key=str):
+        print(f"username: {name}, key: {key}")  
         if self.findUser(name) == True: # if the username exists
             cell = worksheet.find(name)
-            worksheet.update_cell(cell.row, (cell.col+2), key)
+            worksheet.update_cell(cell.row, (cell.col+2), str(key))
         else:
             print(f"Hmmmm. The username {name} is not in our system.") 
             return False 

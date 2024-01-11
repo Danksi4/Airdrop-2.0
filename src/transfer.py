@@ -23,8 +23,8 @@ def send(hostIPAddress=str,filename=str,Username=str):
     print('Connected')
     #----------- Start of Encryption/Comp -----------#
     key=process.Sender(filename) #NEED TO VERIFY
-    x=Database                   #--------------
-    Database.addKey(Username,key)#--------------
+    x = Database()                #--------------
+    x.addKey(Username,key)#--------------
     filename=filename+'E'        #--------------
     filesize = os.path.getsize(filename) #Added here to get compressed size --------
     #----------- End of Encryption/Comp -------------#

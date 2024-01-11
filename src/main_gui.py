@@ -125,9 +125,9 @@ class App(customtkinter.CTk):
         # get the recipients ip adress using their username
         host_ip = self.db.getUserAddress(self.receiver.get())
         file_name = self.filename.get()
+        username = self.receiver.get()
         self.receiver.delete(0,len(self.receiver.get()))
         self.filename.delete(0,len(self.filename.get()))
-        username=self.receiver.get()
         transfer.send(host_ip, file_name, username)
 
 
