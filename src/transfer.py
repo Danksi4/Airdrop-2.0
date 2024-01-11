@@ -25,7 +25,7 @@ def send(hostIPAddress=str,filename=str,Username=str):
     key=process.Sender(filename) #NEED TO VERIFY
     x=Database                   #--------------
     Database.addKey(Username,key)#--------------
-    filename=filename+'E'        #--------------
+    filename=filename+'E.huf'    #--------------
     filesize = os.path.getsize(filename) #Added here to get compressed size --------
     #----------- End of Encryption/Comp -------------#
     # send the file name and file size information to the server
@@ -74,8 +74,9 @@ def receive(Username=str):
     #----------- Start of decryption/Decomp --------#
     key=Database.getKey(Username)
     x=Database
-    process.Receiver(filename,key)
+    newfile=filename.replace('.huf','')
+    process.Receiver(newfile,key) #Just added, may need to take out
     client_socket.close()
     print('The file has now been decompressed')
-
+    #----------- End of decryption/Decomp ----------#
     s.close()
