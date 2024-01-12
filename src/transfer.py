@@ -25,7 +25,7 @@ def send(hostIPAddress=str,filename=str,Username=str):
     key=process.Sender(filename) #NEED TO VERIFY
     x=Database                   #--------------
     Database.addKey(Username,key)#--------------
-    filename=filename+'E.huf'    #--------------
+    filename=filename+'E'        #--------------
     filesize = os.path.getsize(filename) #Added here to get compressed size --------
     #----------- End of Encryption/Comp -------------#
     # send the file name and file size information to the server
