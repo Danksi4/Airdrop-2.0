@@ -49,6 +49,7 @@ class Database():
         if self.findUser(name) == True: # if the username exists
             cell = worksheet.find(name)
             print(worksheet.cell(cell.row, (cell.col+1)).value)
+            
         else:
             print(f"Hmmmm. The username {name} is not in our system.") 
             return False 
