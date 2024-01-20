@@ -37,6 +37,10 @@ class App(customtkinter.CTk):
         y = (hs/2) - (h/2)
         self.geometry('%dx%d+%d+%d' % (w, h, x, y)) # screen dimensions and spawn location
 
+        ## The grid system
+        self.grid_rowconfigure(5, weight=1)
+        self.grid_columnconfigure((0,3), weight=1)
+        
         ## Deciding if the user needs to add their username and ip address or not
         self.main()
         if (self.USER == None) and (self.IPADDRESS == None):
@@ -48,13 +52,16 @@ class App(customtkinter.CTk):
     def main(self):
         # create a textbox for entering the recipients username
         self.receiver = customtkinter.CTkEntry(self, placeholder_text="Enter Recipient Username")
-        self.receiver.grid(row=0, column=0, sticky="w", padx=(12, 0), pady=12)
+        self.receiver.grid(row=1, column=2, sticky="w", padx=(12, 0), pady=12)
         # create a textbox for entering the filename
         self.filename = customtkinter.CTkEntry(self, placeholder_text="Enter Filename You Wish to Send")
-        self.filename.grid(row=1, column=0, sticky="w", padx=(12, 0), pady=12)
+        self.filename.grid(row=2, column=2, sticky="w", padx=(12, 0), pady=12)
         # create a send button that calls the sendFile() function when pressed
         self.sendbutton = customtkinter.CTkButton(self, text="Send File", command=self.sendFile)
-        self.sendbutton.grid(row=100, column=0, sticky="w", padx=(12, 0), pady=12)
+        self.sendbutton.grid(row=3, column=1, sticky="w", padx=(12, 0), pady=12)
+        # create a receive button that calls the receiveFile() function when pressed
+        self.receivebutton = customtkinter.CTkButton(self, text="Receive File", command=self.receiveFile)
+        self.receivebutton.grid(row=3, column=3, sticky="w", padx=(12, 0), pady=12)
 
 
     def addUserForFirstTime(self,errorMessage=""):
