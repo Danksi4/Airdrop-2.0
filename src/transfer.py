@@ -80,3 +80,7 @@ def receive(Username=str):
     print('The file has now been decompressed')
     #----------- End of decryption/Decomp ----------#
     s.close()
+
+if __name__=="__main__":
+    print("receiving")
+    receive()

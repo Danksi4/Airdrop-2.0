@@ -119,14 +119,6 @@ class App(customtkinter.CTk):
         print("Number:", dialog.get_input())
 
 
-    def fileLocation(self):
-        pass
-
-
-    def findClient(self):
-        pass
-
-
     def sendFile(self):  
         # FIXME once the ip adress is obtained using the username, pass that into the transfer.send() function as the recipients ip
         # get the recipients ip adress using their username
