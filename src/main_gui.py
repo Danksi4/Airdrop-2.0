@@ -52,16 +52,16 @@ class App(customtkinter.CTk):
     def main(self):
         # create a textbox for entering the recipients username
         self.receiver = customtkinter.CTkEntry(self, placeholder_text="Enter Recipient Username")
-        self.receiver.grid(row=1, column=2, sticky="w", padx=(12, 0), pady=12)
+        self.receiver.grid(row=0, column=1, sticky="w", padx=(12, 0), pady=12)
         # create a textbox for entering the filename
         self.filename = customtkinter.CTkEntry(self, placeholder_text="Enter Filename You Wish to Send")
-        self.filename.grid(row=2, column=2, sticky="w", padx=(12, 0), pady=12)
+        self.filename.grid(row=0, column=3, sticky="w", padx=(12, 0), pady=12)
         # create a send button that calls the sendFile() function when pressed
         self.sendbutton = customtkinter.CTkButton(self, text="Send File", command=self.sendFile)
-        self.sendbutton.grid(row=3, column=1, sticky="w", padx=(12, 0), pady=12)
+        self.sendbutton.grid(row=6, column=1, sticky="w", padx=(12, 0), pady=12)
         # create a receive button that calls the receiveFile() function when pressed
         self.receivebutton = customtkinter.CTkButton(self, text="Receive File", command=self.receiveFile)
-        self.receivebutton.grid(row=3, column=3, sticky="w", padx=(12, 0), pady=12)
+        self.receivebutton.grid(row=6, column=3, sticky="w", padx=(12, 0), pady=12)
 
 
     def addUserForFirstTime(self,errorMessage=""):

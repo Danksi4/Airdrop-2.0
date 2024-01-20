@@ -48,7 +48,7 @@ class Database():
     def getUserAddress(self,name=str): # returns the user's ip address
         if self.findUser(name) == True: # if the username exists
             cell = worksheet.find(name)
-            print(worksheet.cell(cell.row, (cell.col+1)).value)
+            return (worksheet.cell(cell.row, (cell.col+1)).value)
         else:
             print(f"Hmmmm. The username {name} is not in our system.") 
             return False 
