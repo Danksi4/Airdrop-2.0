@@ -54,7 +54,7 @@ class App(customtkinter.CTk):
         self.filename.grid(row=1, column=0, sticky="w", padx=(12, 0), pady=12)
         # create a send button that calls the sendFile() function when pressed
         self.sendbutton = customtkinter.CTkButton(self, text="Send File", command=self.sendFile)
-        self.sendbutton.grid(row=2, column=0, sticky="w", padx=(12, 0), pady=12)
+        self.sendbutton.grid(row=100, column=0, sticky="w", padx=(12, 0), pady=12)
 
 
     def addUserForFirstTime(self,errorMessage=""):
