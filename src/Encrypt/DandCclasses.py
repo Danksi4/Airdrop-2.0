@@ -21,7 +21,9 @@ class DandC():
         return -1
 
     def decompressor(self):
-        with open(self.compressedfile , 'rb') as comped:
+    #   with open(self.compressedfile , 'rb') as comped: #FIX THIS PART, I THINK IT ALREADY PASSES A FILE NAME WITH .huf
+        with open(self.compressedfile, 'rb') as comped:
+            #newfile=self.file.replace('.huf','') MIGHT NEED THIS LATER
             with open(self.file,'wb') as decomped:
                 util.decompress(comped,decomped)
         return -1
