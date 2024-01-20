@@ -16,15 +16,16 @@ def send(hostIPAddress=str,filename=str,Username=str):
     ## The send function employs the client code in order to send files to the server
     
     ## Connection
-    #filesize = os.path.getsize(filename)  # get the size of the file in bytes '''Removed for now -A'''
+    print(f"send: host: {hostIPAddress} filename: {filename} username: {Username}")
     s = socket.socket()  # create the client socket
     print(f'[+] Connecting to {hostIPAddress}:{SERVER_PORT}')  # connecting to the server
     s.connect((hostIPAddress, SERVER_PORT))
     print('Connected')
     #----------- Start of Encryption/Comp -----------#
     key=process.Sender(filename) #NEED TO VERIFY
-    x=Database()                   #--------------
-    Database.addKey(Username,key)#--------------
+    x=Database()                  #--------------
+    x.addKey(Username,key)#--------------
+    print(f"27: send: host: {hostIPAddress} filename: {filename} username: {Username}")
     filename=filename+'E.huf'        #--------------
     filesize = os.path.getsize(filename) #Added here to get compressed size --------
     #----------- End of Encryption/Comp -------------#
@@ -72,8 +73,8 @@ def receive(Username=str):
             f.write(bytes_read)
             progress.update(len(bytes_read)) # updates the progress bar with bytes_read / range(filesize)
     #----------- Start of decryption/Decomp --------#
-    key=Database.getKey(Username)
-    x=Database
+    x=Database()
+    key=x.getKey(Username)
     newfile=filename.replace('.huf','')
     process.Receiver(newfile,key) #Just added, may need to take out
     client_socket.close()

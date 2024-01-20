@@ -122,11 +122,12 @@ class App(customtkinter.CTk):
     def sendFile(self):  
         # FIXME once the ip adress is obtained using the username, pass that into the transfer.send() function as the recipients ip
         # get the recipients ip adress using their username
-        host_ip = self.db.getUserAddress(self.receiver.get())
+        host_ip = self.db.getUserAddress(self.receiver.get()) # receiver is the text entry box
         file_name = self.filename.get()
         username = self.receiver.get()
         self.receiver.delete(0,len(self.receiver.get()))
         self.filename.delete(0,len(self.filename.get()))
+        print(f"host: {host_ip} filename: {file_name} username: {username}")
         transfer.send(host_ip, file_name, username)
 
 
